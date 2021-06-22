@@ -1,0 +1,17 @@
+[{
+    "min_value": 0,
+    "max_value": 12500,
+    "tax_rate": 0
+  },{
+    "min_value": 12501,
+    "max_value": 50000,
+    "tax_rate": 0.2
+  },{
+    "min_value": 50001,
+    "max_value": 150000,
+    "tax_rate": 0.4
+  },{
+    "min_value": 150001,
+    "max_value": -1,
+    "tax_rate": 0.45
+  }]
