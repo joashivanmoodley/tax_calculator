@@ -18,5 +18,4 @@
             }
 
 #Tax Band Inputs:
-    Theres a json file called tax_band.json which lives in the Base dir.
-    file values cant be changed to suit tax rates but the name may not. 
+    changing the file content with in the github repo and setting a flag called refresh_data to True will update the tax bands
