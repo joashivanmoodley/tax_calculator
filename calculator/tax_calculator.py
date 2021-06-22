@@ -15,7 +15,7 @@ class TaxCalculator:
         """
         try:
             logger.info("processing file data")
-            return json.loads(str(self.data))
+            return self.data
         except Exception as ex:
             logger.error(ex)
 
@@ -29,7 +29,7 @@ class TaxCalculator:
             salary = Decimal(self.salary)
             remainder = salary
             data = []
-            ordered_bands = sorted(bands, key=lambda k: k['min_value'], reverse=True)
+            ordered_bands = sorted(eval(bands), key=lambda k: k['min_value'], reverse=True)
             for band in ordered_bands:
                     min_value = Decimal(band['min_value'])
                     max_value = Decimal(band['max_value'])
@@ -49,3 +49,5 @@ class TaxCalculator:
             return None
         logger.info("tax owed: {}".format(Decimal(round(total_tax, 2))))
         return Decimal(round(total_tax, 2)), data
+
+

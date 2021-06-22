@@ -4,7 +4,14 @@ from calculator.serializer import CalculatorSerializer
 from calculator.tax_calculator import TaxCalculator
 from django.conf import settings
 import logging
+import requests
 logger = logging.getLogger(__name__)
+
+
+def get_latest_data():
+    url = 'https://raw.githubusercontent.com/joashivanmoodley/tax_calculator/main/tax_band.json'
+    r = requests.get(url, allow_redirects=True)
+    open("{}/tax_band.json".format(settings.BASE_DIR), 'r+').write(str(r.json()))
 
 
 class CalculatorView(APIView):
@@ -28,6 +35,10 @@ class CalculatorView(APIView):
             serializer = CalculatorSerializer(data=data)
             if serializer.is_valid():
                 salary = serializer.data['salary']
+                if 'refresh_data' in serializer.data:
+                    refresh_data = serializer.data['refresh_data']
+                    if refresh_data:
+                        get_latest_data()
 
                 tax_filename = "{}/tax_band.json".format(settings.BASE_DIR)
                 tax_file = open(tax_filename, "r")
